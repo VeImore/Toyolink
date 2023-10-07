@@ -1,0 +1,13 @@
+h1 {
+    font-family: Impact;
+    color: purple;
+    text-align: center;
+}
+
+body {
+    background-color: rgb(70, 72, 74);
+}
+
+.center {
+    text-align: center;
+}
