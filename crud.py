@@ -1,40 +1,63 @@
-from model import db, Users, User_List, Movies_Shows, Ratings_Reviews, Genres, Media_Genres, connect_to_db
+from model import db, Users, User_List, Movies, Ratings_Reviews, Genres, Media_Genres, connect_to_db
 
-def create_users(username, email, password):
+def create_users(username, password):
 
-    users = Users (username=username, email=email, password=password)
+    users = Users (username=username, password=password)
 
     return users
 
-def create_user_list(users, movies_shows):
+def create_user_list(users, movies):
 
-    user_list = User_List (users=users, movies_shows=movies_shows)
+    user_list = User_List (users=users, movies=movies)
 
     return user_list
 
-def create_movies_shows(title, director, genre, rating, year, media_type):
+def create_movies(content_id, 
+                  title, 
+                  tagline, 
+                  director, 
+                  genre, 
+                  vote_average, 
+                  year, 
+                  media_type,
+                  poster_path):
 
-    movies_shows = Movies_Shows (title=title, director=director, genre=genre, rating=rating, year=year, media_type=media_type)
+    movies = Movies(cotent_id=content_id, 
+                    title=title, 
+                    tagline=tagline, 
+                    director=director, 
+                    genre=genre, 
+                    vote_average=vote_average, 
+                    year=year, 
+                    media_type=media_type,
+                    poster_path=poster_path)
+    return movies
 
-    return movies_shows
+def get_movies():
 
-def create_ratings_reviews(users, movies_shows, rating, review):
+    return Movies.query.all()
 
-    ratings_reviews = Ratings_Reviews (users=users, movies_shows=movies_shows, rating=rating, review=review)
+def create_ratings(users, movies, rating):
+
+    ratings_reviews = Ratings_Reviews (users=users, 
+                                       movies=movies, 
+                                       rating=rating)
 
     return ratings_reviews
 
-def create_genres(genres, media_genres):
+def get_genres(genres, media_genres):
 
-    genres = Genres (genres=genres, media_genres=media_genres)
+    genres = Genres (genres=genres, 
+                     media_genres=media_genres)
 
-    return genres
+    return genres.query.all()
 
-def create_media_genres(movies_shows, genres):
+def get_media_genres(movies, genres):
 
-    media_genres = Media_Genres (movies_shows=movies_shows, genres=genres)
+    media_genres = Media_Genres (movies=movies, 
+                                 genres=genres)
 
-    return media_genres
+    return media_genres.query.all()
 
 if __name__ == '__main__':
     from server import app

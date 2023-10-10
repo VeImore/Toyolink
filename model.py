@@ -33,33 +33,34 @@ class User_List(db.Model):
 
     list_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey("users.user_id"))
-    content_id = db.Column(db.String, db.ForeignKey("movies_shows.content_id"))
+    content_id = db.Column(db.String, db.ForeignKey("movies.content_id"))
 
     users = db.relationship("Users", back_populates="user_list")
-    movies_shows = db.relationship("Movies_Shows", back_populates="user_list")
+    movies = db.relationship("Movies", back_populates="user_list")
 
     def __repr__(self):
         return f'<User_List list_id={self.list_id} user_id={self.user_id} content_id={self.content_id}>'
     
-class Movies_Shows(db.Model):
+class Movies(db.Model):
 
-    __tablename__ = "movies_shows"
+    __tablename__ = "movies"
 
     content_id = db.Column(db.String, primary_key=True)
     title = db.Column(db.String)
-    director = db.Column(db.String)
+    tagline = db.Column(db.String)
+    director = db.Column(db.String, nullable=True)
     genre = db.Column(db.String)
-    rating = db.Column(db.Integer)
+    vote_average = db.Column(db.Integer)
     year = db.Column(db.String)
     media_type = db.Column(db.String)
-    api_id = db.Column(db.String)
+    poster_path = db.Column(db.String)
 
-    user_list = db.relationship("User_List", back_populates="movies_shows")
-    ratings_reviews = db.relationship("Ratings_Reviews", back_populates="movies_shows")
-    media_genres = db.relationship("Media_Genres", back_populates="movies_shows")
+    user_list = db.relationship("User_List", back_populates="movies")
+    ratings_reviews = db.relationship("Ratings_Reviews", back_populates="movies")
+    media_genres = db.relationship("Media_Genres", back_populates="movies")
 
     def __repr__(self):
-        return f'<Movies_Shows content_id={self.content_id} title={self.title} director={self.director} genre={self.genre} rating={self.rating} media_type={self.media_type} api_id={self.api_id}>'
+        return f'<Movies content_id={self.content_id} title={self.title} director={self.director} genre={self.genre} rating={self.rating} media_type={self.media_type} api_id={self.api_id}>'
 
 class Ratings_Reviews(db.Model):
 
@@ -69,10 +70,10 @@ class Ratings_Reviews(db.Model):
     rating = db.Column(db.Integer)
     review = db.Column(db.String)
     user_id = db.Column(db.Integer, db.ForeignKey("users.user_id"))
-    content_id = db.Column(db.String, db.ForeignKey("movies_shows.content_id"))
+    content_id = db.Column(db.String, db.ForeignKey("movies.content_id"))
 
     users = db.relationship("Users", back_populates="ratings_reviews")
-    movies_shows = db.relationship("Movies_Shows", back_populates="ratings_reviews")
+    movies = db.relationship("Movies", back_populates="ratings_reviews")
 
     def __repr__(self):
         return f'<Ratings_Reviews ratings_reviews_id={self.ratings_reviews_id} rating={self.rating} review={self.review} user_id={self.user_id} content_id={self.content_id}>'
@@ -91,10 +92,10 @@ class Media_Genres(db.Model):
     __tablename__ = "media_genres"
 
     media_genres_id = db.Column(db.Integer, primary_key=True)
-    content_id = db.Column(db.String, db.ForeignKey("movies_shows.content_id"))
+    content_id = db.Column(db.String, db.ForeignKey("movies.content_id"))
     genre_id = db.Column(db.Integer, db.ForeignKey("genres.genre_id"))
     
-    movies_shows = db.relationship("Movies_Shows", back_populates="media_genres")
+    movies = db.relationship("Movies", back_populates="media_genres")
     genres = db.relationship("Genres", back_populates="media_genres")
 
 if __name__ == "__main__":

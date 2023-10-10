@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <h1 class="center"> Please Create Account: </h1>
+{% endblock head %}
+
+{% block body %}
+    <form action="/">
+        <div>
+            <label> Username: </label>
+            <input type="text" placeholder="Enter Username" name="username" required>
+            <label> Password: </label>
+            <input type="text" placeholder="Enter Password" name="password" required>
+            <button type="sumbit"> Login </button>
+        </div>
+    </form>
+{% endblock body %}
