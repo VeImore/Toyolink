@@ -4,7 +4,7 @@ db = SQLAlchemy()
 
 def connect_to_db(flask_app, db_uri="postgresql:///Toyolink", echo=True):
     flask_app.config["SQLALCHEMY_DATABASE_URI"] = db_uri
-    flask_app.config["SQLALCHEMY_ECHO"] = echo
+    flask_app.config["SQLALCHEMY_ECHO"] = False
     flask_app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
     db.app = flask_app
@@ -49,7 +49,7 @@ class Movies(db.Model):
     title = db.Column(db.String)
     tagline = db.Column(db.String)
     director = db.Column(db.String, nullable=True)
-    genre = db.Column(db.String)
+    genre = db.Column(db.String, nullable=True)
     vote_average = db.Column(db.Integer)
     year = db.Column(db.String)
     media_type = db.Column(db.String)
@@ -82,7 +82,7 @@ class Genres(db.Model):
 
     __tablename__ = "genres"
 
-    genre_id = db.Column(db.Integer, primary_key=True)
+    genre_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     genre = db.Column(db.String)
 
     media_genres = db.relationship("Media_Genres", back_populates="genres")
@@ -91,7 +91,7 @@ class Media_Genres(db.Model):
 
     __tablename__ = "media_genres"
 
-    media_genres_id = db.Column(db.Integer, primary_key=True)
+    media_genres_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     content_id = db.Column(db.String, db.ForeignKey("movies.content_id"))
     genre_id = db.Column(db.Integer, db.ForeignKey("genres.genre_id"))
     

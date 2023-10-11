@@ -15,18 +15,16 @@ def create_user_list(users, movies):
 def create_movies(content_id, 
                   title, 
                   tagline, 
-                  director, 
-                  genre, 
+                   
                   vote_average, 
                   year, 
                   media_type,
                   poster_path):
-
-    movies = Movies(cotent_id=content_id, 
+    
+    movies = Movies(content_id=content_id, 
                     title=title, 
                     tagline=tagline, 
-                    director=director, 
-                    genre=genre, 
+                    
                     vote_average=vote_average, 
                     year=year, 
                     media_type=media_type,
@@ -58,6 +56,23 @@ def get_media_genres(movies, genres):
                                  genres=genres)
 
     return media_genres.query.all()
+
+def get_genre_by_name(name):
+
+    return  Genres.query.filter_by(genre=name).first()
+
+# create_genre("Action") -> make a new Genre entry where the genre="Action"
+def create_genre(genre_by_name):
+
+    new_genre = Genres(genre=genre_by_name)
+
+    return new_genre
+
+def create_media_genre(movies, genres):
+    
+    new_media_genre = Media_Genres(movies=movies, genres=genres)
+
+    return new_media_genre
 
 if __name__ == '__main__':
     from server import app
