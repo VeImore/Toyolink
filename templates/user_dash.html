@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <h1 class="center"> Welcome bacl, {{username}}! </h1>
+{% endblock head %}
+
+{% block body %}
+    <form action="">
+        <div>
+            <label> Username: </label>
+            <input type="text" placeholder="Enter Username" name="username" required>
+            <button type="sumbit"> Login </button>
+        </div>
+    </form>
+{% endblock body %}
