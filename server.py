@@ -12,13 +12,66 @@ app.jinja_env.undefined = StrictUndefined
 
 @app.route('/')
 def homepage():
+
     return render_template('homepage.html')
+
+@app.route('/movies')
+def all_movies():
+
+    movies = crud.get_movies()
+
+    return render_template('all_movies.html', movies=movies)
+
+@app.route("/movies/<content_id>")
+def show_movie(content_id):
+    """Show details on a particular movie."""
+
+    movie= crud.get_movie_by_id(content_id)
+
+    return render_template("movie_details.html", movie=movie)
+
+@app.route('/users')
+def display_users():
+    """Show all users"""
+    users = crud.get_users()
+
+    return render_template(".html", users=users)
+
+@app.route('/users', methods=["POST"])
+def register_user():
+
+    username = request.form.get("email")
+    password = request.form.get("password")
+
+    user = crud.get_user_by_username(username)
+    if user:
+        flash("Cannot create an account with that email. Try again.")
+    else:
+        user = crud.create_user(username, password)
+        db.session.add(user)
+        db.session.commit()
+        flash("Account created! Please log in.")
+
+    return redirect("/")
+
+
+@app.route('/login', methods=["POST"])
+def login_user():
+    """Log user in"""
+    username = request.form.get("username")
+    password = request.form.get("password")
+
+    user = crud.get_user_by_username(username)
+    if not user or user.password != password:
+        flash("This username or password you entered is incorrect.")
+    else:
+        session["user_username"] = user.username
+        flash(f"Welcome back {user.username}!")
+    
+    return redirect('/movies')
 
 @app.route('/user_login')
 def user_login():
-
-    username = request.form.get("username")
-    password = request.form.get("password")
 
     return render_template('user_login.html')
 
@@ -31,38 +84,6 @@ def create_account():
 def user_dash():
 
     return render_template('user_dash.html')
-
-@app.route('/user_list')
-def user_list():
-
-    return render_template('user_list')
-
-@app.route('/movies')
-def all_movies():
-
-    movies = crud.get_movies()
-
-    return render_template('all_movies.html', movies=movies)
-
-@app.route('/shows')
-def shows():
-
-    return render_template('shows')
-
-@app.route('/ratings_reviews')
-def ratings_reviews():
-
-    return render_template('ratings_reviews')
-
-@app.route('/genres')
-def genres():
-
-    return render_template('genres')
-
-@app.route('/couple_movies')
-def couple_movies():
-
-    return render_template('couple_movies')
 
 if __name__ == "__main__":
     connect_to_db(app)

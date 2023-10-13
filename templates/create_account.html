@@ -5,13 +5,17 @@
 {% endblock head %}
 
 {% block body %}
-    <form action="/">
-        <div>
-            <label> Username: </label>
-            <input type="text" placeholder="Enter Username" name="username" required>
-            <label> Password: </label>
-            <input type="text" placeholder="Enter Password" name="password" required>
-            <button type="sumbit"> Login </button>
-        </div>
+    <form action="/users" method="POST">
+    <p>
+        Username: <input type="text" name="Username">
+    </p>
+
+    <p>
+        Password: <input type="password" name="password">
+    </p>
+
+    <p>
+        <input type="submit">
+    </p>
     </form>
 {% endblock body %}

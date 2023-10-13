@@ -1,47 +1,59 @@
-from model import db, Users, User_List, Movies, Ratings_Reviews, Genres, Media_Genres, connect_to_db
+from model import db, User, Movie, Rating, connect_to_db
 
 def create_users(username, password):
 
-    users = Users (username=username, password=password)
+    user = User (username=username, password=password)
 
-    return users
+    return user
 
-def create_user_list(users, movies):
-
-    user_list = User_List (users=users, movies=movies)
-
-    return user_list
-
-def create_movies(content_id, 
+def create_movie(content_id, 
                   title, 
                   tagline, 
-                   
                   vote_average, 
                   year, 
                   media_type,
                   poster_path):
     
-    movies = Movies(content_id=content_id, 
+    movie = Movie(content_id=content_id, 
                     title=title, 
                     tagline=tagline, 
-                    
                     vote_average=vote_average, 
                     year=year, 
                     media_type=media_type,
                     poster_path=poster_path)
-    return movies
+    return movie
+
+def create_rating(users, movie, score):
+
+    rating = Rating(users=users, 
+                    movie=movie, 
+                    score=score)
+
+    return rating
 
 def get_movies():
 
-    return Movies.query.all()
+    return Movie.query.all()
 
-def create_ratings(users, movies, rating):
+def get_movie_by_id(content_id):
+    """Get movie by id."""
 
-    ratings_reviews = Ratings_Reviews (users=users, 
-                                       movies=movies, 
-                                       rating=rating)
+    return Movie.query.get(content_id)
 
-    return ratings_reviews
+def get_users():
+    """Return all users."""
+
+    return User.query.all()
+
+def get_users_profile(user_id):
+    """Return user profile data"""
+
+    return User.query.get(user_id)
+
+def get_user_by_username(username):
+    """Return a user by email."""
+
+    return User.query.filter(User.username == username).first()
 
 def get_genres(genres, media_genres):
 
@@ -50,9 +62,9 @@ def get_genres(genres, media_genres):
 
     return genres.query.all()
 
-def get_media_genres(movies, genres):
+def get_media_genres(movie, genres):
 
-    media_genres = Media_Genres (movies=movies, 
+    media_genres = Media_Genres (movie=movie, 
                                  genres=genres)
 
     return media_genres.query.all()
@@ -68,11 +80,15 @@ def create_genre(genre_by_name):
 
     return new_genre
 
-def create_media_genre(movies, genres):
+def create_media_genre(movie, genres):
     
-    new_media_genre = Media_Genres(movies=movies, genres=genres)
+    new_media_genre = Media_Genres(movie=movie, genres=genres)
 
     return new_media_genre
+
+def get_user_by_username(username):
+    
+    return User.query.filter(User.username == username).first()
 
 if __name__ == '__main__':
     from server import app

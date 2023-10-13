@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <h1 class="center"> Welcome back, {{username}}! </h1>
+{% endblock head %}
+
+{% block body %}
+<h1>{{ user.email }}</h1>
+<ul>
+{% for rating in user.ratings %}
+    <li>
+        {{rating.movie.title}}: {{rating.score}}
+    </li>
+{% endfor %}    
+</ul>
+{% endblock %}

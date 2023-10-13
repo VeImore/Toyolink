@@ -51,7 +51,6 @@ for movie in movie_data:
                                                                              movie["poster_path"])
 
     db_movie = crud.create_movies(content_id, title, tagline, vote_average, year, "movies", poster_path)
-
     movies_in_db.append(db_movie)
 
     # ------------------------
@@ -63,14 +62,3 @@ for movie in movie_data:
 
 model.db.session.add_all(movies_in_db)
 model.db.session.commit()
-
-#Open movies.json and read then process
-#as looking through for each movie iterrate
-    #check if genre data
-        #create instance using that
-        #commit to db
-    #create movie instance aswell
-    #commit to db
-    #look through genres
-        #for genres create media_genres entries
-        #commit to db

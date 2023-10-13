@@ -1,15 +1,18 @@
 {% extends 'base.html' %}
 
 {% block head %}
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width">
+
 {% endblock head %}
 
 {% block body %}
 <h1>All Movies</h1>
 <ul>
     {% for movie in movies %}
-    <p>{{ movies }}</p>
+    <li>
+        <a href="/movies/{{ movie.content_id }}">
+            {{ movie.title }}
+        </a>
+    </li>
     {% endfor %}
 </ul>
 {% endblock body %}
