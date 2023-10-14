@@ -28,7 +28,7 @@ def show_movie(content_id):
 
     movie= crud.get_movie_by_id(content_id)
 
-    return render_template("movie_details.html", movie=movie)
+    return render_template("movie_page.html", movie=movie)
 
 @app.route('/users')
 def display_users():
@@ -47,7 +47,7 @@ def register_user():
     if user:
         flash("Cannot create an account with that email. Try again.")
     else:
-        user = crud.create_user(username, password)
+        user = crud.create_users(username, password)
         db.session.add(user)
         db.session.commit()
         flash("Account created! Please log in.")

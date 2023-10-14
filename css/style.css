@@ -6,6 +6,7 @@ h1 {
 }
 
 body {
+    color: blue;
     background-color: aqua;
     margin: 0;
     padding: 0;
@@ -13,4 +14,23 @@ body {
 
 .center {
     text-align: center;
+}
+
+li {
+    display: inline;
+    margin: 0;
+    padding: 0;
+}
+
+title {
+    font-family: Impact;
+    color: purple;
+    text-align: center;
+    font-size: 5px;
+}
+
+.poster {
+    height: 200px;
+    width: 50%;
+    background-color: powderblue;  
 }

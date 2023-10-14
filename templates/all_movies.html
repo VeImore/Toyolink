@@ -5,13 +5,17 @@
 {% endblock head %}
 
 {% block body %}
-<h1>All Movies</h1>
+<h1>Movies:</h1>
+<button onclick="location.href='/'">Back To Homepage</button>
 <ul>
     {% for movie in movies %}
     <li>
+        <span>
         <a href="/movies/{{ movie.content_id }}">
+        <img class="poster", src="https://image.tmdb.org/t/p/original/{{ movie.poster_path }}">
             {{ movie.title }}
         </a>
+        </span>
     </li>
     {% endfor %}
 </ul>
