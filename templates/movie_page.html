@@ -3,14 +3,15 @@
 {% block title %}{{ movie.title }}{% endblock %}
 
 {% block body %}
+<button onclick="location.href='/movies'">Back To All Movies</button>
 <h1>{{ movie.title }}</h1>
 
 <p>
   {{ movie.tagline }}
 </p>
 
+<img src="https://image.tmdb.org/t/p/original/{{ movie.poster_path }}">
 
-{% if session.get('user_username') %}
 <h2>Select Rating:</h2>
 <form action="/movies/{{ movie.content_id }}/ratings" method="POST">
   <p>
@@ -24,7 +25,5 @@
   </p>
   <p> <input type = "submit"></p>
 </form>
-{% endif %}
-<img src="https://image.tmdb.org/t/p/original/{{ movie.poster_path }}">
-<button onclick="location.href='/movies'">Back To All Movies</button>
+
 {% endblock %}

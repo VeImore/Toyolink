@@ -1,4 +1,5 @@
-from flask import (Flask, render_template, request, flash, session, redirect)
+from flask import (Flask, render_template, request, flash, session, redirect, url_for)
+from werkzeug.security import generate_password_hash, check_password_hash
 app = Flask(__name__)
 
 from model import connect_to_db, db
@@ -9,6 +10,8 @@ from jinja2 import StrictUndefined
 app = Flask(__name__)
 app.secret_key = "dev"
 app.jinja_env.undefined = StrictUndefined
+
+users = {}
 
 @app.route('/')
 def homepage():
@@ -37,38 +40,45 @@ def display_users():
 
     return render_template(".html", users=users)
 
-@app.route('/users', methods=["POST"])
-def register_user():
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        username = request.form['Username']
+        password = request.form['password']
 
-    username = request.form.get("email")
-    password = request.form.get("password")
+        if username in users:
+            flash('Username already exists!')
+            return redirect(url_for('register'))
+ 
+        hashed_password = generate_password_hash(password, method='sha256')
+        users[username] = hashed_password
 
-    user = crud.get_user_by_username(username)
-    if user:
-        flash("Cannot create an account with that email. Try again.")
-    else:
-        user = crud.create_users(username, password)
-        db.session.add(user)
-        db.session.commit()
-        flash("Account created! Please log in.")
-
-    return redirect("/")
-
-
-@app.route('/login', methods=["POST"])
-def login_user():
-    """Log user in"""
-    username = request.form.get("username")
-    password = request.form.get("password")
-
-    user = crud.get_user_by_username(username)
-    if not user or user.password != password:
-        flash("This username or password you entered is incorrect.")
-    else:
-        session["user_username"] = user.username
-        flash(f"Welcome back {user.username}!")
+        flash('Registration successful!')
+        return redirect(url_for('login'))
     
-    return redirect('/movies')
+    return render_template('register.html')
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        username = request.form['Username']
+        password = request.form['password']
+
+        if username in users and check_password_hash(users[username], password):
+            return redirect(url_for('all_movies'))
+        else:
+            flash('Invalid username or password!')
+            return redirect(url_for('login'))
+    
+    return render_template('user_login.html')
+
+@app.route('/users/<user_id>')
+def show_user(user_id):
+
+    users = crud.get_users_profile(user_id)
+
+    return render_template("user_profile.html", user=users)
 
 @app.route('/user_login')
 def user_login():
