@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Movies in Genre: {{ selected_genre }}</h1>
+
+<!-- Genre Selector Form -->
+<form action="/movies_genres" method="GET">
+    <label for="genre">Select Genre:</label>
+    <select name="genre" onchange="this.form.submit()">
+        <option value="">--All Genres--</option>
+        {% for genre in genres %}
+            <option value="{{ genre.genre }}" 
+                    {% if genre.genre == selected_genre %} selected {% endif %}>
+                {{ genre.genre }}
+            </option>
+        {% endfor %}
+    </select>
+</form>
+
+<!-- List of Movies -->
+<ul>
+    {% for movie in movies %}
+        <li>
+            <a href="/movie/{{ movie.content_id }}">
+                <img src="https://image.tmdb.org/t/p/original/{{ movie.poster_path }}" alt="{{ movie.title }}" />
+                {{ movie.title }}
+            </a>
+        </li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

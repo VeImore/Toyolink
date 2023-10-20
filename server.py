@@ -2,7 +2,7 @@ from flask import (Flask, render_template, request, flash, session, redirect, ur
 from werkzeug.security import generate_password_hash, check_password_hash
 app = Flask(__name__)
 
-from model import connect_to_db, db
+from model import connect_to_db, db, Movie, Genre, Media_Genres
 import crud
 
 from jinja2 import StrictUndefined
@@ -18,12 +18,22 @@ def homepage():
 
     return render_template('homepage.html')
 
-@app.route('/movies')
-def all_movies():
+@app.route('/movies_by_genre', methods=['GET', 'POST'])
+def show_movies_by_genre():
+    selected_genre = request.args.get('genre')  # Use URL parameter to get the genre
+    if request.method == 'POST':
+        selected_genre = request.form['genre']
+        # Redirect to the same route with the genre as a URL parameter
+        return redirect(url_for('show_movies_by_genre', genre=selected_genre))
 
-    movies = crud.get_movies()
+    if selected_genre:
+        movies = Movie.query.filter_by(genre=selected_genre).all()
+    else:
+        movies = Movie.query.all()
+    
+    genres = Genre.query.all()  # Fetch genres outside the else block
 
-    return render_template('all_movies.html', movies=movies)
+    return render_template('movies_by_genre.html', movies=movies, genres=genres, selected_genre=selected_genre)
 
 @app.route("/movies/<content_id>")
 def show_movie(content_id):
@@ -66,7 +76,7 @@ def login():
         password = request.form['password']
 
         if username in users and check_password_hash(users[username], password):
-            return redirect(url_for('all_movies'))
+            return redirect(url_for('show_movies'))
         else:
             flash('Invalid username or password!')
             return redirect(url_for('login'))
@@ -90,10 +100,17 @@ def create_account():
 
     return render_template('create_account.html')
 
-@app.route('/user_dash')
-def user_dash():
-
-    return render_template('user_dash.html')
+@app.route('/all_movies', methods=['GET', 'POST'])
+def show_movies():
+    selected_genre = None
+    if request.method == 'POST':
+        selected_genre = request.form['genre']
+    if selected_genre:
+        movies = Movie.query.filter_by(genre=selected_genre).all()
+    else:
+        movies = Movie.query.all()
+    genres = Genre.query.all()
+    return render_template('all_movies.html', movies=movies, genres=genres)
 
 if __name__ == "__main__":
     connect_to_db(app)

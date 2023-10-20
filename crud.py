@@ -55,42 +55,39 @@ def get_user_by_username(username):
 
     return User.query.filter(User.username == username).first()
 
-# $$$
+# def get_genres(genres, media_genres):
 
-def get_genres(genres, media_genres):
+#     genres = Genres (genres=genres, 
+#                      media_genres=media_genres)
 
-    genres = Genres (genres=genres, 
-                     media_genres=media_genres)
+#     return genres.query.all()
 
-    return genres.query.all()
+# def get_media_genres(movie, genres):
 
-def get_media_genres(movie, genres):
+#     media_genres = Media_Genres (movie=movie, 
+#                                  genres=genres)
 
-    media_genres = Media_Genres (movie=movie, 
-                                 genres=genres)
+#     return media_genres.query.all()
 
-    return media_genres.query.all()
+# def get_genre_by_name(name):
 
-def get_genre_by_name(name):
+#     return  Genres.query.filter_by(genre=name).first()
 
-    return  Genres.query.filter_by(genre=name).first()
+# def create_genre(genre_by_name):
 
-# create_genre("Action") -> make a new Genre entry where the genre="Action"
-def create_genre(genre_by_name):
+#     new_genre = Genres(genre=genre_by_name)
 
-    new_genre = Genres(genre=genre_by_name)
+#     return new_genre
 
-    return new_genre
-
-def create_media_genre(movie, genres):
+# def create_media_genre(movie, genres):
     
-    new_media_genre = Media_Genres(movie=movie, genres=genres)
+#     new_media_genre = Media_Genres(movie=movie, genres=genres)
 
-    return new_media_genre
+#     return new_media_genre
 
-def get_user_by_username(username):
+# def get_user_by_username(username):
     
-    return User.query.filter(User.username == username).first()
+#     return User.query.filter(User.username == username).first()
 
 if __name__ == '__main__':
     from server import app

@@ -1,14 +1,48 @@
 {% extends 'base.html' %}
 
-{% block title %}{{user.username}}'s Page{% endblock %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+</head>
+<body>
 
-{% block body %}
-<h1>{{ user.username }}</h1>
-<ul>
-{% for rating in user.ratings %}
-    <li>
-        {{rating.movie.title}}: {{rating.score}}
-    </li>
-{% endfor %}    
-</ul>
-{% endblock body %}
+<h1>User Ratings</h1>
+
+{% if user_ratings %}
+<table border="1">
+    <thead>
+        <tr>
+            <th>Movie Title</th>
+            <th>Your Rating</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for movie, rating in user_ratings %}
+        <tr>
+            <td>{{ movie }}</td>
+            <td>{{ rating }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p>You haven't rated any movies yet!</p>
+{% endif %}
+
+<h2>Select Rating:</h2>
+<form action="/movies/{{ movie.content_id }}/ratings" method="POST">
+  <p>
+    Rating: 
+    <select name="rating">
+      <option value="">Select your rating!</option>
+      {% for num in range(6) %}
+      <option value="{{num}}">{{num}}</option>
+      {% endfor %}
+    </select>
+  </p>
+  <p><input type="submit"></p>
+</form>
+
+</body>
+</html>

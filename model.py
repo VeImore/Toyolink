@@ -43,7 +43,8 @@ class Movie(db.Model):
 
     # user_list = db.relationship("User_List", back_populates="movie")
     ratings = db.relationship("Rating", back_populates="movie")
-    # media_genres = db.relationship("Media_Genres", back_populates="movie")
+    media_genres = db.relationship("Media_Genres", back_populates="movie")
+
 
     def __repr__(self):
         return f'<Movies content_id={self.content_id} title={self.title} director={self.director} genre={self.genre} rating={self.rating} media_type={self.media_type} api_id={self.api_id}>'
@@ -63,6 +64,26 @@ class Rating(db.Model):
 
     def __repr__(self):
         return f'<Rating rating_id={self.rating_id} rating={self.rating} review={self.review} user_id={self.user_id} content_id={self.content_id}>'
+    
+class Genre(db.Model):
+
+    __tablename__ = "genres"
+
+    genre_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    genre = db.Column(db.String)
+
+    media_genres = db.relationship("Media_Genres", back_populates="genre")
+
+class Media_Genres(db.Model):
+
+    __tablename__ = "media_genres"
+
+    media_genres_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    content_id = db.Column(db.String, db.ForeignKey("movies.content_id"))
+    genre_id = db.Column(db.Integer, db.ForeignKey("genres.genre_id"))
+    
+    movie = db.relationship("Movie", back_populates="media_genres")
+    genre = db.relationship("Genre", back_populates="media_genres")
 
 # class User_List(db.Model):
 
@@ -77,26 +98,6 @@ class Rating(db.Model):
 
 #     def __repr__(self):
 #         return f'<User_List list_id={self.list_id} user_id={self.user_id} content_id={self.content_id}>'
-    
-# class Genres(db.Model):
-
-#     __tablename__ = "genres"
-
-#     genre_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-#     genre = db.Column(db.String)
-
-#     media_genres = db.relationship("Media_Genres", back_populates="genres")
-
-# class Media_Genres(db.Model):
-
-#     __tablename__ = "media_genres"
-
-#     media_genres_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-#     content_id = db.Column(db.String, db.ForeignKey("movies.content_id"))
-#     genre_id = db.Column(db.Integer, db.ForeignKey("genres.genre_id"))
-    
-#     movies = db.relationship("Movies", back_populates="media_genres")
-#     genres = db.relationship("Genres", back_populates="media_genres")
 
 if __name__ == "__main__":
     from server import app
