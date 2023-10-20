@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 
-{% block content %}
+{% block body %}
 
 <h1>Movies in Genre: {{ selected_genre }}</h1>
+<button onclick="location.href='/all_movies'">Back To All Movies</button>
 
-<!-- Genre Selector Form -->
 <form action="/movies_genres" method="GET">
     <label for="genre">Select Genre:</label>
     <select name="genre" onchange="this.form.submit()">
@@ -18,16 +18,14 @@
     </select>
 </form>
 
-<!-- List of Movies -->
 <ul>
     {% for movie in movies %}
         <li>
-            <a href="/movie/{{ movie.content_id }}">
-                <img src="https://image.tmdb.org/t/p/original/{{ movie.poster_path }}" alt="{{ movie.title }}" />
+                <img src="https://image.tmdb.org/t/p/original/{{ movie.poster_path }}" />
                 {{ movie.title }}
             </a>
         </li>
     {% endfor %}
 </ul>
 
-{% endblock %}
+{% endblock body %}
