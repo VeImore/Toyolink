@@ -2,7 +2,7 @@ from flask import (Flask, render_template, request, flash, session, redirect, ur
 from werkzeug.security import generate_password_hash, check_password_hash
 app = Flask(__name__)
 
-from model import connect_to_db, db, Movie, Genre, Media_Genres
+from model import connect_to_db, db, Movie, Genre, User, Rating, Media_Genres
 import crud
 
 from jinja2 import StrictUndefined
@@ -20,18 +20,18 @@ def homepage():
 
 @app.route('/movies_by_genre', methods=['GET', 'POST'])
 def show_movies_by_genre():
-    selected_genre = request.args.get('genre')  # Use URL parameter to get the genre
+    selected_genre = request.args.get('genre')
     if request.method == 'POST':
         selected_genre = request.form['genre']
-        # Redirect to the same route with the genre as a URL parameter
         return redirect(url_for('show_movies_by_genre', genre=selected_genre))
 
     if selected_genre:
-        movies = Movie.query.filter_by(genre=selected_genre).all()
+        genre_obj = Genre.query.filter_by(genre=selected_genre).first()
+        movies = genre_obj.get_movies() if genre_obj else []
     else:
         movies = Movie.query.all()
-    
-    genres = Genre.query.all()  # Fetch genres outside the else block
+
+    genres = [genre_obj.genre for genre_obj in Genre.query.all()]
 
     return render_template('movies_by_genre.html', movies=movies, genres=genres, selected_genre=selected_genre)
 
@@ -43,25 +43,21 @@ def show_movie(content_id):
 
     return render_template("movie_page.html", movie=movie)
 
-@app.route('/users')
-def display_users():
-    """Show all users"""
-    users = crud.get_users()
-
-    return render_template(".html", users=users)
-
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
         username = request.form['Username']
         password = request.form['password']
 
-        if username in users:
+        existing_user = User.query.filter_by(username=username).first()
+        if existing_user:
             flash('Username already exists!')
             return redirect(url_for('register'))
  
         hashed_password = generate_password_hash(password, method='sha256')
-        users[username] = hashed_password
+        new_user = User(username=username, password=hashed_password)
+        db.session.add(new_user)
+        db.session.commit()
 
         flash('Registration successful!')
         return redirect(url_for('login'))
@@ -75,7 +71,10 @@ def login():
         username = request.form['Username']
         password = request.form['password']
 
-        if username in users and check_password_hash(users[username], password):
+        user = User.query.filter_by(username=username).first()
+
+        if user and check_password_hash(user.password, password):
+            session['user_id'] = user.user_id  # Optionally store user_id in session for future use
             return redirect(url_for('show_movies'))
         else:
             flash('Invalid username or password!')
@@ -83,12 +82,14 @@ def login():
     
     return render_template('user_login.html')
 
-@app.route('/users/<user_id>')
-def show_user(user_id):
 
-    users = crud.get_users_profile(user_id)
+@app.route('/user/<user_id>')
+def user_profile(user_id):
+    # Assuming there's a get_user_ratings function in crud module
+    # that returns a list of (movie, rating) tuples for the user.
+    user_ratings = crud.get_user_ratings(user_id)
+    return render_template('user_profile.html', user_ratings=user_ratings)
 
-    return render_template("user_profile.html", user=users)
 
 @app.route('/user_login')
 def user_login():

@@ -17,9 +17,8 @@ class User(db.Model):
     __tablename__ = "users"
 
     user_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    username = db.Column(db.String, unique=True)
-    email = db.Column(db.String, unique=True)
-    password = db.Column(db.String)
+    username = db.Column(db.String, unique=True, nullable=False)
+    password = db.Column(db.String, nullable=False)
 
     # user_list = db.relationship("User_List", back_populates="users")
     ratings = db.relationship("Rating", back_populates="user")
@@ -53,7 +52,7 @@ class Rating(db.Model):
 
     __tablename__ = "ratings"
 
-    rating_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    ratings_reviews_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     rating = db.Column(db.Integer)
     review = db.Column(db.String)
     user_id = db.Column(db.Integer, db.ForeignKey("users.user_id"))

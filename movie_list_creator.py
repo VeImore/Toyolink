@@ -21,7 +21,7 @@ response_dict = response.json()
 
 data = []
 
-for i in range(550, 562):
+for i in range(62, 1062):
     url = f"https://api.themoviedb.org/3/movie/{i}?api_key=496eca191c88e77e7b5701423aec44a6"
     response = requests.get(url)
     response_dict = response.json()
