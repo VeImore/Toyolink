@@ -36,39 +36,29 @@ def get_movies():
     return Movie.query.all()
 
 def get_movie_by_id(content_id):
-    """Get movie by id."""
 
     return Movie.query.get(content_id)
 
 def get_users():
-    """Return all users."""
 
     return User.query.all()
 
 def get_users_profile(user_id):
-    """Return user profile data"""
 
     return User.query.get(user_id)
 
 def get_user_by_username(username):
-    """Return a user by email."""
 
     return User.query.filter(User.username == username).first()
 
 def get_user_ratings(user_id):
-    """Return a list of (movie, rating) tuples for the specified user."""
     
-    # Retrieve the user by user_id
     user = User.query.get(user_id)
-    
-    # If the user doesn't exist, return an empty list
+
     if user is None:
         return []
     
-    # Retrieve all ratings given by the user
     user_ratings_records = Rating.query.filter_by(user_id=user_id).all()
-    
-    # Extract the related movies and ratings into a list of (movie, rating) tuples
     user_ratings = [(record.movie, record.score) for record in user_ratings_records]
     
     return user_ratings

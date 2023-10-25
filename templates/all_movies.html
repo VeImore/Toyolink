@@ -6,7 +6,7 @@
 
 {% block body %}
 <h1>Movies:</h1>
-<button onclick="location.href='/user/<user_id>'">Profile</button>
+<button onclick="location.href='/user/{{user_id}}'">Profile</button>
 <button onclick="location.href='/'">Back To Homepage</button>
 
 <form action="/movies_by_genre" method="POST">
@@ -15,7 +15,7 @@
         <option value="">--All Genres--</option>
         {% for genre in genres %}
             
-            <option value="{{ genre.genre_id }}">{{ genre.genre }}</option> <!-- Assuming the column name for genre names is 'genre' -->
+            <option value="{{ genre.genre_id }}">{{ genre.genre }}</option> 
         {% endfor %}
     </select>
 </form>

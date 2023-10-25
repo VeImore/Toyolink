@@ -13,7 +13,7 @@
 <img src="https://image.tmdb.org/t/p/original/{{ movie.poster_path }}">
 
 <h2>Select Rating:</h2>
-<form action="/movies/{{ movie.content_id }}/ratings" method="POST">
+<form>
   <p>
     Rating: 
     <select name = "rating">
@@ -30,6 +30,12 @@
   <textarea name="review" rows="5" cols="50" placeholder="Write your review here..."></textarea>
   
   <p><input type="submit"></p>
+</form>
+
+<form>
+  Rating: <input type="number" name="rating" min="1" max="10" required>
+  Review: <textarea name="review" rows="4" cols="50"></textarea>
+  <input type="submit" value="Submit">
 </form>
 
 {% endblock %}
