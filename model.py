@@ -62,7 +62,7 @@ class Rating(db.Model):
     movie = db.relationship("Movie", back_populates="ratings")
 
     def __repr__(self):
-        return f'<Rating rating_id={self.rating_id} rating={self.rating} review={self.review} user_id={self.user_id} content_id={self.content_id}>'
+        return f'<Rating rating_reviews_id={self.rating_reviews_id} rating={self.rating} review={self.review} user_id={self.user_id} content_id={self.content_id}>'
     
 class Genre(db.Model):
 

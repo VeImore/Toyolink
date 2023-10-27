@@ -53,3 +53,16 @@ p {
     font-family: Impact;
     -webkit-text-stroke: .5px black;
 }
+
+.form-container {
+    display: flex;
+    gap: 1in; 
+    justify-content: space-between;
+}
+
+.dropdowns-container {
+    display: flex;
+    gap: 1in; 
+    justify-content: space-between;
+
+}

@@ -28,7 +28,6 @@ def show_movies_by_genre():
     if selected_genre:
         genre_obj = Genre.query.filter_by(genre=selected_genre).first()
         movies = [mg.movie for mg in genre_obj.media_genres]
-        #movies = genre_obj.get_movies() if genre_obj else []
     else:
         movies = Movie.query.all()
 
@@ -111,26 +110,37 @@ def show_movies():
     genres = Genre.query.all()
     return render_template('all_movies.html', user_id=user_id, movies=movies, genres=genres)
 
-@app.route('/rate_movie/<content_id>', methods=['POST'])
+@app.route("/movies/<content_id>/rate", methods=['POST'])
 def rate_movie(content_id):
-    user_id = session['user_id']
-    user = User.query.get(user_id)
-    movie = Movie.query.get(content_id)
-
-    if not user or not movie:
-        flash('Error Rating Movie.')
-        return redirect(url_for('hoempage'))
+    """Handle rating submission for a movie."""
     
-    rating_value = request.form['rating']
-    review_text = request.form['review']
-
-    rating = Rating(user=user, movie=movie, rating=rating, review=review_text)
-
-    db.session.add(rating)
+    user_id = session.get('user_id')
+    if not user_id:
+        flash("Please login first!")
+        return redirect(url_for('login'))
+    
+    rating = request.form['rating']
+    review = request.form['review']
+    
+    movie_rating = Rating(rating=rating, review=review, user_id=user_id, content_id=content_id)
+    db.session.add(movie_rating)
     db.session.commit()
+    
+    flash('Rating and Review submitted successfully!')
+    return redirect(url_for('show_movie', content_id=content_id))
 
-    flash('Rating Submitted.')
-    return redirect(url_for('user_profile', user_id=user_id))
+@app.route("/movie_finder")
+def movie_finder():
+    selected_genre = None
+    user_id = session['user_id']
+    if request.method == 'POST':
+        selected_genre = request.form['genre']
+    if selected_genre:
+        movies = Movie.query.filter_by(genre=selected_genre).all()
+    else:
+        movies = Movie.query.all()
+    genres = Genre.query.all()
+    return render_template('movie_finder.html',user_id=user_id, movies=movies, genres=genres)
 
 if __name__ == "__main__":
     connect_to_db(app)

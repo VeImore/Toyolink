@@ -23,12 +23,8 @@ def create_movie(content_id,
                     poster_path=poster_path)
     return movie
 
-def create_rating(users, movie, score):
-
-    rating = Rating(users=users, 
-                    movie=movie, 
-                    score=score)
-
+def create_rating(users, movie, rating_value):
+    rating = Rating(users=users, movie=movie, rating=rating_value)
     return rating
 
 def get_movies():
@@ -59,44 +55,9 @@ def get_user_ratings(user_id):
         return []
     
     user_ratings_records = Rating.query.filter_by(user_id=user_id).all()
-    user_ratings = [(record.movie, record.score) for record in user_ratings_records]
+    user_ratings = [(record.movie, record) for record in user_ratings_records]
     
     return user_ratings
-
-
-# def get_genres(genres, media_genres):
-
-#     genres = Genres (genres=genres, 
-#                      media_genres=media_genres)
-
-#     return genres.query.all()
-
-# def get_media_genres(movie, genres):
-
-#     media_genres = Media_Genres (movie=movie, 
-#                                  genres=genres)
-
-#     return media_genres.query.all()
-
-# def get_genre_by_name(name):
-
-#     return  Genres.query.filter_by(genre=name).first()
-
-# def create_genre(genre_by_name):
-
-#     new_genre = Genres(genre=genre_by_name)
-
-#     return new_genre
-
-# def create_media_genre(movie, genres):
-    
-#     new_media_genre = Media_Genres(movie=movie, genres=genres)
-
-#     return new_media_genre
-
-# def get_user_by_username(username):
-    
-#     return User.query.filter(User.username == username).first()
 
 if __name__ == '__main__':
     from server import app

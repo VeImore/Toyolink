@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block head %}
+
+  {% block title %}
+    <h1>Movie Finder:</h1>
+  {% endblock title %}
+
+{% endblock head %}
+
+{% block body %}
+<button onclick="location.href='/all_movies'">Back To All Movies</button>
+
+<div class="form-container">
+    <form action="/movies_by_genre" method="POST">
+        <div class="dropdowns-container">
+            <div>
+                <label for="genre1">Select Genre:</label>
+                <select name="genre1">
+                    <option value="">--All Genres--</option>
+                    {% for genre in genres %}
+                        <option value="{{ genre.genre_id }}">{{ genre.genre }}</option> 
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div>
+                <label for="genre2">Select Genre:</label>
+                <select name="genre2">
+                    <option value="">--All Genres--</option>
+                    {% for genre in genres %}
+                        <option value="{{ genre.genre_id }}">{{ genre.genre }}</option> 
+                    {% endfor %}
+                </select>
+            </div>
+        </div> 
+
+        <input type="submit" value="Submit">
+    </form>
+</div>
+
+
+{% endblock body %}
