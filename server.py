@@ -27,7 +27,11 @@ def show_movies_by_genre():
 
     if selected_genre:
         genre_obj = Genre.query.filter_by(genre=selected_genre).first()
-        movies = [mg.movie for mg in genre_obj.media_genres]
+        if genre_obj:
+            movies = [mg.movie for mg in genre_obj.media_genres]
+        else:
+            flash('Genre not found!')
+            return redirect(url_for('show_movies_by_genre'))
     else:
         movies = Movie.query.all()
 
@@ -129,18 +133,23 @@ def rate_movie(content_id):
     flash('Rating and Review submitted successfully!')
     return redirect(url_for('show_movie', content_id=content_id))
 
-@app.route("/movie_finder")
+@app.route('/movie_finder', methods=['GET', 'POST'])
 def movie_finder():
-    selected_genre = None
-    user_id = session['user_id']
+    movies = []
     if request.method == 'POST':
-        selected_genre = request.form['genre']
-    if selected_genre:
-        movies = Movie.query.filter_by(genre=selected_genre).all()
-    else:
-        movies = Movie.query.all()
+        genre1_id = request.form['genre1']
+        genre2_id = request.form['genre2']
+
+        movies_genre1 = set([mg.movie for mg in Media_Genres.query.filter_by(genre_id=genre1_id).all()])
+        movies_genre2 = set([mg.movie for mg in Media_Genres.query.filter_by(genre_id=genre2_id).all()])
+
+        movies = list(movies_genre1.intersection(movies_genre2))
+
+        genres = Genre.query.all()
+        return render_template('movie_finder.html', movies=movies, genres=genres)
+
     genres = Genre.query.all()
-    return render_template('movie_finder.html',user_id=user_id, movies=movies, genres=genres)
+    return render_template('movie_finder.html', movies=movies, genres=genres)
 
 if __name__ == "__main__":
     connect_to_db(app)

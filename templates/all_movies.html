@@ -8,18 +8,8 @@
 <h1>Movies:</h1>
 <button onclick="location.href='/user/{{user_id}}'">Profile</button>
 <button onclick="location.href='/'">Back To Homepage</button>
+<button onclick="location.href='/movies_by_genre'">Movie By Genre</button>
 <button onclick="location.href='/movie_finder'">Movie Finder</button>
-
-<form action="/movies_by_genre" method="POST">
-    <label for="genre">Select Genre:</label>
-    <select name="genre" onchange="this.form.submit()">
-        <option value="">--All Genres--</option>
-        {% for genre in genres %}
-            
-            <option value="{{ genre.genre_id }}">{{ genre.genre }}</option> 
-        {% endfor %}
-    </select>
-</form>
 
 <ul>
     {% for movie in movies %}

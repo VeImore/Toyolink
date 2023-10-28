@@ -84,20 +84,6 @@ class Media_Genres(db.Model):
     movie = db.relationship("Movie", back_populates="media_genres")
     genre = db.relationship("Genre", back_populates="media_genres")
 
-# class User_List(db.Model):
-
-#     __tablename__ = "user_list"
-
-#     list_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-#     user_id = db.Column(db.Integer, db.ForeignKey("users.user_id"))
-#     content_id = db.Column(db.String, db.ForeignKey("movies.content_id"))
-
-#     users = db.relationship("Users", back_populates="user_list")
-#     movies = db.relationship("Movies", back_populates="user_list")
-
-#     def __repr__(self):
-#         return f'<User_List list_id={self.list_id} user_id={self.user_id} content_id={self.content_id}>'
-
 if __name__ == "__main__":
     from server import app
 

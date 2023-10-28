@@ -1,43 +1,42 @@
 {% extends 'base.html' %}
 
-{% block head %}
-
-  {% block title %}
-    <h1>Movie Finder:</h1>
-  {% endblock title %}
-
-{% endblock head %}
-
 {% block body %}
+
+<h1>Movies with Selected Genres</h1>
 <button onclick="location.href='/all_movies'">Back To All Movies</button>
 
-<div class="form-container">
-    <form action="/movies_by_genre" method="POST">
-        <div class="dropdowns-container">
-            <div>
-                <label for="genre1">Select Genre:</label>
-                <select name="genre1">
-                    <option value="">--All Genres--</option>
-                    {% for genre in genres %}
-                        <option value="{{ genre.genre_id }}">{{ genre.genre }}</option> 
-                    {% endfor %}
-                </select>
-            </div>
+<form action="/movie_finder" method="POST">
 
-            <div>
-                <label for="genre2">Select Genre:</label>
-                <select name="genre2">
-                    <option value="">--All Genres--</option>
-                    {% for genre in genres %}
-                        <option value="{{ genre.genre_id }}">{{ genre.genre }}</option> 
-                    {% endfor %}
-                </select>
-            </div>
-        </div> 
+    <label for="genre1">Select First Genre:</label>
+    <select name="genre1">
+        <option value="">--All Genres--</option>
+        {% for genre in genres %}
+            <option value="{{ genre.genre_id }}">
+                {{ genre.genre }}
+            </option>
+        {% endfor %}
+    </select>
 
-        <input type="submit" value="Submit">
-    </form>
-</div>
+    <label for="genre2">Select Second Genre:</label>
+    <select name="genre2">
+        <option value="">--All Genres--</option>
+        {% for genre in genres %}
+            <option value="{{ genre.genre_id }}">
+                {{ genre.genre }}
+            </option>
+        {% endfor %}
+    </select>
+    <input type="submit" value="Submit">
+</form>
 
+<ul>
+    {% for movie in movies %}
+        <li>
+            <a href="/movies/{{ movie.content_id }}">
+                <img src="https://image.tmdb.org/t/p/original/{{ movie.poster_path }}" alt="{{ movie.title }}" />
+            </a>
+        </li>
+    {% endfor %}
+</ul>
 
 {% endblock body %}

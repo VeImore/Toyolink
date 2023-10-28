@@ -15,7 +15,7 @@
   <ul>
     {% for movie, rating in user_ratings %}
       <li>
-        <strong>{{ movie.title }}</strong> {{ rating.rating }} {{rating.review }}
+        <strong> Title: {{ movie.title }}</strong> Rating: {{ rating.rating }} Review: {{rating.review }}
       </li>
     {% endfor %}
   </ul>
