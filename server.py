@@ -133,17 +133,32 @@ def rate_movie(content_id):
     flash('Rating and Review submitted successfully!')
     return redirect(url_for('show_movie', content_id=content_id))
 
+from random import choice
+
 @app.route('/movie_finder', methods=['GET', 'POST'])
 def movie_finder():
     movies = []
+    
     if request.method == 'POST':
-        genre1_id = request.form['genre1']
-        genre2_id = request.form['genre2']
 
-        movies_genre1 = set([mg.movie for mg in Media_Genres.query.filter_by(genre_id=genre1_id).all()])
-        movies_genre2 = set([mg.movie for mg in Media_Genres.query.filter_by(genre_id=genre2_id).all()])
+        first_half = [
+            request.form['genre1'],
+            request.form['genre2'],
+            request.form['genre3']
+        ]
+        second_half = [
+            request.form['genre4'],
+            request.form['genre5'],
+            request.form['genre6']
+        ]
 
-        movies = list(movies_genre1.intersection(movies_genre2))
+        selected_genre1 = choice([g for g in first_half if g])
+        selected_genre2 = choice([g for g in second_half if g])
+
+        movies1 = set([mg.movie for mg in Media_Genres.query.filter_by(genre_id=selected_genre1).all()])
+        movies2 = set([mg.movie for mg in Media_Genres.query.filter_by(genre_id=selected_genre2).all()])
+
+        movies = list(movies1.intersection(movies2))
 
         genres = Genre.query.all()
         return render_template('movie_finder.html', movies=movies, genres=genres)

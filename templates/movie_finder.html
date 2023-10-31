@@ -7,18 +7,10 @@
 
 <form action="/movie_finder" method="POST">
 
-    <label for="genre1">Select First Genre:</label>
-    <select name="genre1">
-        <option value="">--All Genres--</option>
-        {% for genre in genres %}
-            <option value="{{ genre.genre_id }}">
-                {{ genre.genre }}
-            </option>
-        {% endfor %}
-    </select>
+    {% for i in range(1, 7) %}
+    <label for="genre{{ i }}">Select Genre {{ i }}:</label>
 
-    <label for="genre2">Select Second Genre:</label>
-    <select name="genre2">
+    <select name="genre{{ i }}">
         <option value="">--All Genres--</option>
         {% for genre in genres %}
             <option value="{{ genre.genre_id }}">
@@ -26,6 +18,9 @@
             </option>
         {% endfor %}
     </select>
+    </br>
+    {% endfor %}
+    
     <input type="submit" value="Submit">
 </form>
 
