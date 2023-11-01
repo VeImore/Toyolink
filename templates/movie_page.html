@@ -10,7 +10,7 @@
   {{ movie.tagline }}
 </p>
 
-<img src="https://image.tmdb.org/t/p/original/{{ movie.poster_path }}">
+<img class="img" src="https://image.tmdb.org/t/p/original/{{ movie.poster_path }}">
 
 <form action="{{ url_for('rate_movie', content_id=movie.content_id) }}" method="post">
   <h2>Select Rating:</h2>
