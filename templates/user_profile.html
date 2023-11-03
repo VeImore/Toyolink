@@ -2,14 +2,16 @@
 
 {% block head %}
 
-  {% block title %}
+    {% block title %}
+    <h3> Toyolink </h3>
+    {% endblock title %}
+
     <h1>User Profile:</h1>
-  {% endblock title %}
 
 {% endblock head %}
 
 {% block body %}
-<button onclick="location.href='/all_movies'">Back To All Movies</button>
+<button onclick="location.href='/all_movies'" class="form-submit-button">Back To All Movies</button>
 {% if user_ratings %}
   <h2>My List:</h2>
   <ul>

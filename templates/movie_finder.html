@@ -1,9 +1,17 @@
 {% extends 'base.html' %}
 
+{% block head %}
+
+    {% block title %}
+    <h3> Toyolink </h3>
+    {% endblock title %}
+
+{% endblock head %}
+
 {% block body %}
 
 <h1>Movies with Selected Genres</h1>
-<button onclick="location.href='/all_movies'">Back To All Movies</button>
+<button onclick="location.href='/all_movies'" class="form-submit-button">Back To All Movies</button>
 
 <form action="/movie_finder" method="POST">
 
@@ -21,7 +29,7 @@
     </br>
     {% endfor %}
     
-    <input type="submit" value="Submit">
+    <input type="submit" value="Submit" class="form-submit-button">
 </form>
 
 <ul>

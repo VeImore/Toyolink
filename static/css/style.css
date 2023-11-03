@@ -11,6 +11,17 @@
     border: none;
 }
 
+.form-submit-button {
+    font-family: Impact;
+    -webkit-text-stroke: .5px rgb(255, 0, 0);
+    background: #000000;
+    color: #fff;
+    border: 1px solid #eee;
+    border-radius: 20px;
+    box-shadow: 5px 5px 5px #ff0000;
+    text-shadow: none;
+}
+
 h1 {
     font-family: Impact;
     color: rgb(255, 255, 255);
@@ -39,7 +50,7 @@ h3 {
 }
 
 body {
-    background-color: rgb(156, 96, 96);
+    background-color: rgb(69, 69, 69);
     text-align: center;
     z-index: 1; /* Set a positive z-index to place it above the background */
 }
@@ -65,7 +76,7 @@ img {
 
 p {
     color: red;
-    font-family: Impact;
+    font-family: SDGlitchDemo;
     -webkit-text-stroke: .5px black;
 }
 

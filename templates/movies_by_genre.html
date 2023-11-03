@@ -1,9 +1,17 @@
 {% extends 'base.html' %}
 
+{% block head %}
+
+    {% block title %}
+    <h3> Toyolink </h3>
+    {% endblock title %}
+
+{% endblock head %}
+
 {% block body %}
 
 <h1>Movies in Genre: {{ selected_genre }}</h1>
-<button onclick="location.href='/all_movies'">Back To All Movies</button>
+<button onclick="location.href='/all_movies'" class="form-submit-button">Back To All Movies</button>
 
 <form action="/movies_by_genre" method="GET">
     <label for="genre">Select Genre:</label>

@@ -1,9 +1,17 @@
 {% extends 'base.html' %}
 
-{% block title %}{{ movie.title }}{% endblock %}
+{% block head %}
+
+    {% block title %}
+    <h3> Toyolink </h3>
+    {% endblock title %}
+
+    {{ movie.title }}
+
+{% endblock head %}
 
 {% block body %}
-<button onclick="location.href='/all_movies'">Back To All Movies</button>
+<button onclick="location.href='/all_movies'" class="form-submit-button">Back To All Movies</button>
 <h1>{{ movie.title }}</h1>
 
 <p>
@@ -27,7 +35,7 @@
   <h2>Leave a Review:</h2>
   <textarea name="review" rows="5" cols="50" placeholder="Write your review here..."></textarea>
   
-  <p><input type="submit" value="Submit"></p>
+  <p><input type="submit" value="Submit" class="form-submit-button"></p>
 </form>
 
 {% endblock %}

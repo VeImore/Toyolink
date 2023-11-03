@@ -1,7 +1,12 @@
 {% extends 'base.html' %}
 
 {% block head %}
-<button onclick="location.href='/'">Back To Homepage</button>
+
+{% block title %}
+<h3> Toyolink </h3>
+{% endblock title %}
+
+<button onclick="location.href='/'" class="form-submit-button">Back To Homepage</button>
     <title>Login Page</title>
 {% endblock head %}
 
@@ -32,7 +37,7 @@
   </p>
 
   <p>
-    <input type="submit">
+    <input type="submit" class="form-submit-button">
   </p>
 </form>
 
