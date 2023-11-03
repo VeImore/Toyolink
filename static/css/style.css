@@ -2,13 +2,13 @@
     background-image: url("/static/img/ToyolinkHome.jpg");
     background-size: cover;
     background-repeat: no-repeat;
-    background-attachment: fixed;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%; /* Set the width to 100% to cover the entire viewport */
     height: 100%; 
     z-index: -1; /* Set a negative z-index to place it behind other elements */
+    border: none;
 }
 
 h1 {
@@ -29,9 +29,12 @@ h2 {
 }
 
 h3 {
+    font-size: 30px;
     font-family: Impact;
-    color: rgb(179, 7, 7);
+    color: rgb(255, 0, 0);
     letter-spacing: 2px;
+    text-align: left;
+    padding: 20px;
     -webkit-text-stroke: .5px black;
 }
 
@@ -60,15 +63,15 @@ img {
     z-index: 1;
 }
 
-head {
-    text-align: left;
-    color: red;
-}
-
 p {
     color: red;
     font-family: Impact;
     -webkit-text-stroke: .5px black;
+}
+
+.header-container {
+    position: relative;
+    padding: 10px; /* Add padding as needed to control the spacing around the text */
 }
 
 .form-container {
@@ -83,4 +86,3 @@ p {
     justify-content: space-between;
 
 }
-

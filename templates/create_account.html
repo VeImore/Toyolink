@@ -1,10 +1,15 @@
 {% extends 'base.html' %}
 
 {% block head %}
+<button onclick="location.href='/'">Back To Homepage</button>
     <title>Registration Page</title>
 {% endblock head %}
 
 {% block body %}
+
+<h5>
+  <img class="homepage">
+</h5>
 
 {% with messages = get_flashed_messages() %}
   {% if messages %}
