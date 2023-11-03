@@ -5,20 +5,25 @@
     {% block title %}
     <h3> Toyolink </h3>
     {% endblock title %}
-
+    <button onclick="location.href='/all_movies'" class="form-submit-button">Back To All Movies</button>
 {% endblock head %}
 
 {% block body %}
 
-<h1>Movies in Genre: {{ selected_genre }}</h1>
-<button onclick="location.href='/all_movies'" class="form-submit-button">Back To All Movies</button>
+{% if selected_genre %}
+  <h1>{{ selected_genre }}</h1>
+{% else %}
+  <h1>Please select a genre</h1>
+{% endif %}
 
 <form action="/movies_by_genre" method="GET">
-    <label for="genre">Select Genre:</label>
-    <select name="genre" onchange="this.form.submit()">
-        <option value="">--All Genres--</option>
+    <h9>
+    <label for="genre">Genre:</label>
+    </h9>
+    <select name="genre" onchange="this.form.submit()" class="genre-dropdown">
+        <option value="" class="genre-dropdown">--All Genres--</option>
         {% for genre in genres %}
-            <option value="{{ genre }}" 
+            <option class="genre-dropdown" value="{{ genre }}" 
                     {% if genre == selected_genre %} selected {% endif %}>
                 {{ genre }}
             </option>
@@ -29,7 +34,8 @@
 <ul>
     {% for movie in movies %}
         <li>
-                <img src="https://image.tmdb.org/t/p/original/{{ movie.poster_path }}" />
+            <a href="/movies/{{ movie.content_id }}">
+            <img src="https://image.tmdb.org/t/p/original/{{ movie.poster_path }}" />      
             </a>
         </li>
     {% endfor %}

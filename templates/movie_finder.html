@@ -5,32 +5,60 @@
     {% block title %}
     <h3> Toyolink </h3>
     {% endblock title %}
-
+    <button onclick="location.href='/all_movies'" class="form-submit-button">Back To All Movies</button>
 {% endblock head %}
 
 {% block body %}
 
-<h1>Movies with Selected Genres</h1>
-<button onclick="location.href='/all_movies'" class="form-submit-button">Back To All Movies</button>
+<h1>Movie Finder:</h1>
 
-<form action="/movie_finder" method="POST">
-
-    {% for i in range(1, 7) %}
-    <label for="genre{{ i }}">Select Genre {{ i }}:</label>
-
-    <select name="genre{{ i }}">
-        <option value="">--All Genres--</option>
-        {% for genre in genres %}
-            <option value="{{ genre.genre_id }}">
-                {{ genre.genre }}
-            </option>
+<h7>
+</h7>
+<form action="/movie_finder" method="POST" class="form-container" id="movieFinderForm">
+    <div class="left-dropdowns">
+        {% for i in range(1, 4) %}
+            <h8>
+                <label for="genre{{ i }}"> Genre {{ i }}:</label>
+            </h8>
+            <select name="genre{{ i }}" class="genre-dropdown">
+                <option value="">User # 1</option>
+                {% for genre in genres %}
+                    <option value="{{ genre.genre_id }}">
+                        {{ genre.genre }}
+                    </option>
+                {% endfor %}
+            </select>
+            <br>
         {% endfor %}
-    </select>
-    </br>
-    {% endfor %}
-    
-    <input type="submit" value="Submit" class="form-submit-button">
+    </div>
+
+    <div class="right-dropdowns">
+        {% for i in range(4, 7) %}
+            <h8>
+                <label for="genre{{ i }}"> Genre {{ i }}:</label>
+            </h8>
+            <select name="genre{{ i }}" class="genre-dropdown">
+                <option value="">User # 2</option>
+                {% for genre in genres %}
+                    <option value="{{ genre.genre_id }}">
+                        {{ genre.genre }}
+                    </option>
+                {% endfor %}
+            </select>
+            <br>
+        {% endfor %}
+    </div>
 </form>
+
+<input type="submit" value="Submit" class="form-submit-button" onclick="submitForm()">
+
+<script>
+    function submitForm() {
+        const form = document.getElementById('movieFinderForm');
+        form.submit();
+    }
+</script>
+
 
 <ul>
     {% for movie in movies %}

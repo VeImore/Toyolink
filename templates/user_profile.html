@@ -6,19 +6,26 @@
     <h3> Toyolink </h3>
     {% endblock title %}
 
-    <h1>User Profile:</h1>
+    <button onclick="location.href='/all_movies'" class="form-submit-button">Back To All Movies</button>
+
+    <h1>Profile:</h1>
 
 {% endblock head %}
 
 {% block body %}
-<button onclick="location.href='/all_movies'" class="form-submit-button">Back To All Movies</button>
+
 {% if user_ratings %}
   <h2>My List:</h2>
   <ul>
     {% for movie, rating in user_ratings %}
       <li>
-        <img class="img" src="https://image.tmdb.org/t/p/original/{{ movie.poster_path }}">
-        <strong> Title: {{ movie.title }}</strong> Rating: {{ rating.rating }} Review: {{rating.review }}
+          <a href="/movies/{{ movie.content_id }}">
+          <img class="img" src="https://image.tmdb.org/t/p/original/{{ movie.poster_path }}" />      
+          </a>
+          <br/>
+        <strong> Title: {{ movie.title }}</strong> 
+        Rating: {{ rating.rating }}
+        <div class="review-box">{{ rating.review }}</div>
       </li>
     {% endfor %}
   </ul>

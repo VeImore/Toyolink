@@ -151,7 +151,7 @@ def movie_finder():
             request.form['genre5'],
             request.form['genre6']
         ]
-
+        
         selected_genre1 = choice([g for g in first_half if g])
         selected_genre2 = choice([g for g in second_half if g])
 
