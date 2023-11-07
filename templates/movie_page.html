@@ -9,7 +9,14 @@
 {% endblock head %}
 
 {% block body %}
-<button onclick="location.href='/all_movies'" class="form-submit-button">Back To All Movies</button>
+
+<div class="navbar">
+  <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/all_movies">All Movies</a></li>
+  </ul>
+</div>
+
 <h1>{{ movie.title }}</h1>
 
 <p>

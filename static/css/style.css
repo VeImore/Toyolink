@@ -31,7 +31,7 @@
     font-size: 20px;
     -webkit-text-stroke: 0.2px rgb(255, 0, 0);
     background: #ff0000;
-    color: #fff;
+    color: #ccc6c6;
     border: 1px solid #000000;
     border-radius: 10px;
     box-shadow: 1px 1px 1px #000000;
@@ -42,10 +42,13 @@
 }
 
 .review-box {
-    border: 1px solid #000;
+    border: 5px solid #000;
     padding: 10px;
     margin: 10px 0;
-    background-color: #ddd; /* Background color for the review box */
+    background-color: #c0bcbc;
+    width: 500px;
+    height: 300px;
+    border-radius: 10px;
 }
 
 .content-container {
@@ -81,10 +84,13 @@ h3 {
     font-family: Impact;
     color: rgb(255, 0, 0);
     letter-spacing: 2px;
-    text-align: left;
+    text-align: right;
     padding: 20px;
-    -webkit-text-stroke: .5px black;
+    -webkit-text-stroke: 0.5px black;
+    position: relative; /* Add this line to adjust title's position */
+    z-index: 1;
 }
+
 
 h9 {
     font-family: Impact;
@@ -114,6 +120,24 @@ h7 {
     z-index: 1; 
 }
 
+h10 {
+    font-family: Impact;
+    font-size: 25px;
+    color: rgb(255, 255, 255);
+    letter-spacing: 2px;
+    -webkit-text-stroke: 1px black;
+    z-index: 1; 
+}
+
+h11 {
+    font-family: Impact;
+    font-size: 20px;
+    color: rgb(255, 255, 255);
+    letter-spacing: 1px;
+    -webkit-text-stroke: .5px black;
+    z-index: 1; 
+}
+
 body {
     background-color: rgb(69, 69, 69);
     text-align: center;
@@ -137,7 +161,7 @@ img {
     width: 200px;
     border: 5px solid red;
     border-radius: 10px;
-    z-index: 1;
+    z-index: -1;
 }
 
 p {
@@ -166,5 +190,50 @@ p {
 
 .left-dropdowns,
 .right-dropdowns {
-    width: 48%; /* Adjust as needed */
+    width: 48%; 
 }
+  
+.movie-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Evenly distribute items horizontally */
+}
+
+.movie-item .img {
+    width: 200px;
+    height: 300px;
+    margin-right: 10px;
+}
+
+.movie-item .movie-details {
+    flex: 1;
+}
+
+.navbar {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    z-index: 2; /* Increase the z-index to be above the title */
+}
+
+  
+  .navbar a {
+    font-family: Arial;
+    font-size: 15px;
+    text-decoration: none; 
+    color: white; 
+    margin: 0 15px; 
+    font-weight: bold; 
+    font-size: 15px;
+  }
+  
+  .navbar a:hover {
+    color: #ff3333; 
+  }
+  

@@ -5,7 +5,14 @@
     {% block title %}
     <h3> Toyolink </h3>
     {% endblock title %}
-    <button onclick="location.href='/all_movies'" class="form-submit-button">Back To All Movies</button>
+
+    <div class="navbar">
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/all_movies">All Movies</a></li>
+        </ul>
+    </div>
+
 {% endblock head %}
 
 {% block body %}
