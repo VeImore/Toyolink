@@ -13,14 +13,13 @@
       </ul>
   </div>
   
-    <h1>Profile:</h1>
+    <h1>My List:</h1>
 
 {% endblock head %}
 
 {% block body %}
 
 {% if user_ratings %}
-  <h2>My List:</h2>
   <ul>
     {% for movie, rating in user_ratings %}
     <li class="movie-item">
@@ -30,7 +29,9 @@
       <h10>
         <div class="movie-details">
             <strong>{{ movie.title }}</strong>
-            <br/>
+            <p>
+              {{ movie.tagline }}
+            </p>
             Rating: {{ rating.rating }}
         </div>
       </h10>

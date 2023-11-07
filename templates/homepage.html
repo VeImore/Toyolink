@@ -1,13 +1,6 @@
 {% extends 'base.html' %}
 
 {% block head %}
-
-    {% block title %}
-    <h3> Toyolink </h3>
-    {% endblock title %}
-
-    <h1> Welcome to Toyolink!</h1>
-    
 {% endblock head %}
     
 {% block body %}
@@ -15,19 +8,18 @@
     <h8>
         <img class="homepage">
     </h8>
-
-    <h2> Please Login or Create Account </h2>
+    <h70>Toyolink</h70>
+    <h2> Please Login or Create Account 
     <form action="/user_login">
         <div>
             <button type="submit" class="form-submit-button">Login</button>
         </div>
     </form>
-    <br/>
     <form action="/create_account">
         <div>
             <button type="submit" class="form-submit-button">Create Account</button>
         </div>
     </form>
-    
+    </h2>
 {% endblock body %}
 
