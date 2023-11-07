@@ -26,7 +26,7 @@
 <img class="img" src="https://image.tmdb.org/t/p/original/{{ movie.poster_path }}">
 
 <form action="{{ url_for('rate_movie', content_id=movie.content_id) }}" method="post">
-  <h2>Select Rating:</h2>
+  <h2>Select Rating:
   <p>
     Rating: 
     <select name="rating">
@@ -36,11 +36,14 @@
       {% endfor %}
     </select>
   </p>
+  </h2>
   
-  <h2>Leave a Review:</h2>
+  <h2>Leave a Review:
+    <br/>
   <textarea name="review" rows="5" cols="50" placeholder="Write your review here..."></textarea>
-  
+
   <p><input type="submit" value="Submit" class="form-submit-button"></p>
+  </h2>
 </form>
 
 {% endblock %}
