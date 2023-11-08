@@ -17,8 +17,8 @@ __APIs:__ TMDb <br/>
 
 ## <a name="features"></a>Features:
   
-Create an account or Login:
-![Homepage](/static/img/homepage.jpg)
+Register an account or Login:
+![Homepage](/static/img/Homepage.jpg)
 <br/><br/><br/>
 
 Register a new account:
@@ -70,8 +70,14 @@ Activate the virtual environment:
 ```
 $ source env/bin/activate
 ```
-Install dependencies🔗:
+Install dependencies:
 ```
 $ pip install -r requirements.txt
 ```
 
+## <a name="future"></a>Future Goals:
+* Add more movies
+* Add movie search bar
+* Add more genres
+* Add shows
+* User uploadable profile picture
