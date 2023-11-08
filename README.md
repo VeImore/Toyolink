@@ -59,3 +59,18 @@ Search the entire movie selection based on two people's chosen genres:
 To run this application do the following:
 
 Clone repository:
+```
+$ git clone https://github.com/VeImore/Toyolink.git
+```
+Create a virtual environment:
+```
+$ virtualenv env
+```
+Activate the virtual environment:
+```
+$ source env/bin/activate
+```
+Install dependencies🔗:
+```
+$ pip install -r requirements.txt
+```
