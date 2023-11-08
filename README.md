@@ -21,7 +21,7 @@ Create an account or Login:
 ![Homepage](/static/img/homepage.jpg)
 <br/><br/><br/>
 
-Create a new account:
+Register a new account:
 ![Create An Account](/static/img/Registration.jpg)
 <br/><br/><br/>
 
