@@ -18,7 +18,7 @@ __APIs:__ TMDb <br/>
 ## <a name="features"></a>Features
   
 Create an account or Login:
-![Homepage](/static/img/homepage.jpg)
+![Homepage](static/img/homepage.jpg)
 <br/><br/><br/>
 
 Create a new account:
