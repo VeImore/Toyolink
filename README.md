@@ -1,6 +1,6 @@
 # Toyolink
 
-Toyolink offers a seamless solution for movie enthusiasts, alleviating the hassle of movie selection by consolidating your watched films and your corresponding ratings and reviews in one convenient hub. With Toyolink, users can effortlessly create an account, provide ratings and reviews for movies, explore films categorized by genres, and even discover movies tailored to the different genre preferences of two individuals.
+Toyolink offers a seamless solution for movie enthusiasts, alleviating the hassle of movie selection by consolidating your watched films and your corresponding ratings and reviews in one convenient hub. With Toyolink, users can effortlessly create an account, provide ratings and reviews for movies, explore films categorized by genres, and even discover movies tailored too the different genre preferences of two individuals.
 
 ## Quick Links
 
