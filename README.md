@@ -9,47 +9,47 @@ Toyolink offers a seamless solution for movie enthusiasts, alleviating the hassl
 * [Setup](#installation)
 * [Future Goals](#future)
 
-## <a name="tech-stack"></a>Tech Stack
+## <a name="tech-stack"></a>Tech Stack:
 
 __Frontend:__ HTML, CSS, Javascript, jQuery <br/>
 __Backend:__ Python, Flask, PostgreSQL, SQLAlchemy <br/>
 __APIs:__ TMDb <br/>
 
-## <a name="features"></a>Features
+## <a name="features"></a>Features:
   
 Create an account or Login:
-![Homepage](static/img/homepage.jpg)
+![Homepage](/static/img/homepage.jpg)
 <br/><br/><br/>
 
 Create a new account:
-![Create An Account](/Toyolink/static/img/Registration.jpg)
+![Create An Account](/static/img/Registration.jpg)
 <br/><br/><br/>
 
 Login to your account:
-![Login To Account](/Toyolink/static/img/Login.jpg)
+![Login To Account](/static/img/Login.jpg)
 <br/><br/><br/>
   
 Browse through the entire movie selection:
-![Browse All Movies](/Toyolink/static/img/AllMovies.jpg)
+![Browse All Movies](/static/img/AllMovies.jpg)
 <br/><br/><br/>
 
 Browse profile and ratings/reviews:
-![Your Profile](/Toyolink/static/img/Profile.jpg)
+![Your Profile](/static/img/Profile.jpg)
 <br/><br/><br/>
 
 Browse the movies page and give a rating/review:
-![Movie Pages](/Toyolink/static/img/MoviePage.jpg)
+![Movie Pages](/static/img/MoviePage.jpg)
 <br/><br/><br/>
 
 Search the entire movie selection based on the chosen genre:
-![Genre Search](/Toyolink/static/img/Genre.jpg)
+![Genre Search](/static/img/Genre.jpg)
 <br/><br/><br/>
 
 Search the entire movie selection based on two people's chosen genres:
-![Movie Finder](/Toyolink/static/img/Finder.jpg)
+![Movie Finder](/static/img/Finder.jpg)
 <br/><br/><br/>
 
-## <a name="installation"></a>Setup
+## <a name="installation"></a>Setup:
 
 #### Requirements:
 
@@ -59,28 +59,3 @@ Search the entire movie selection based on two people's chosen genres:
 To run this application do the following:
 
 Clone repository:
-```
-$ git clone https://github.com/VeImore/Toyolink.git
-```
-
-Create a virtual environment:
-```
-$ virtualenv env
-```
-
-Activate the virtual environment:
-```
-$ source env/bin/activate
-```
-
-Install dependencies🔗:
-```
-$ pip install -r requirements.txt
-```
-
-## <a name="future"></a>Future Goals
--Profile picture
--Movie search bar
--Add shows
--Change review/rating
--Change username/password
