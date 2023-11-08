@@ -17,8 +17,8 @@ __APIs:__ TMDb <br/>
 
 ## <a name="features"></a>Features
   
-Create account or Login:
-![Homepage](/Toyolink/static/img/homepage.jpg)
+Create an account or Login:
+![Homepage](/static/img/homepage.jpg)
 <br/><br/><br/>
 
 Create a new account:
@@ -29,7 +29,7 @@ Login to your account:
 ![Login To Account](/Toyolink/static/img/Login.jpg)
 <br/><br/><br/>
   
-Browse through entire movie selection:
+Browse through the entire movie selection:
 ![Browse All Movies](/Toyolink/static/img/AllMovies.jpg)
 <br/><br/><br/>
 
@@ -37,15 +37,15 @@ Browse profile and ratings/reviews:
 ![Your Profile](/Toyolink/static/img/Profile.jpg)
 <br/><br/><br/>
 
-Browse movies page and give a rating/review:
+Browse the movies page and give a rating/review:
 ![Movie Pages](/Toyolink/static/img/MoviePage.jpg)
 <br/><br/><br/>
 
-Search entire movie selection based on chosen genre:
+Search the entire movie selection based on the chosen genre:
 ![Genre Search](/Toyolink/static/img/Genre.jpg)
 <br/><br/><br/>
 
-Search entire movie selection based on two peoples chosen genres:
+Search the entire movie selection based on two people's chosen genres:
 ![Movie Finder](/Toyolink/static/img/Finder.jpg)
 <br/><br/><br/>
 
